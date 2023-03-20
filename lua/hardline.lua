@@ -28,6 +28,7 @@ M.options = {
     {class = 'error', item = require('hardline.parts.lsp').get_error},
     {class = 'warning', item = require('hardline.parts.lsp').get_warning},
     {class = 'warning', item = require('hardline.parts.whitespace').get_item},
+    {class = 'high', item= require('hardline.parts.lsp').get_lsp_clients},
     {class = 'high', item = require('hardline.parts.filetype').get_item, hide = 60},
     {class = 'mode', item = require('hardline.parts.line').get_item},
   },

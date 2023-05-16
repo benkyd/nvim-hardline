@@ -3,7 +3,7 @@ local colors = {
   blue = {gui = '#8aadf4', cterm = '39', cterm16 = '4'},
   cyan = { gui = '#91d7e3', cterm = '38', cterm16 = '6'},
   green = {gui = '#a6da95', cterm = '114', cterm16 = '2'},
-  grey_comment = {gui = '#363a4f', cterm = '59', cterm16 = '15'},
+  grey_comment = {gui = '#a5adcb', cterm = '59', cterm16 = '15'},
   grey_cursor = {gui = '#494d64', cterm = '236', cterm16 = '8'},
   grey_menu = {gui = '#5b6078', cterm = '237', cterm16 = '8'},
   purple = {gui = '#F5BDE6', cterm = '170', cterm16 = '5'},

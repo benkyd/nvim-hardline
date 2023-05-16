@@ -6,7 +6,7 @@ local colors = {
   grey_comment = {gui = '#5C6370', cterm = '59', cterm16 = '15'},
   grey_cursor = {gui = '#2C323C', cterm = '236', cterm16 = '8'},
   grey_menu = {gui = '#3E4452', cterm = '237', cterm16 = '8'},
-  purple = {gui = '#C678DD', cterm = '170', cterm16 = '5'},
+  purple = {gui = '#F5BDE6', cterm = '170', cterm16 = '5'},
   red = {gui = '#E06C75', cterm = '204', cterm16 = '1'},
   white = {gui = '#ABB2BF', cterm = '145', cterm16 = '7'},
   yellow = {gui = '#E5C07B', cterm = '180', cterm16 = '3'},

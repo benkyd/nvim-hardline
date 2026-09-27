@@ -1,16 +1,11 @@
 local fmt = string.format
 
 local function get_diagnostic(prefix, severity)
-  local count
-  if vim.fn.has('nvim-0.6') == 0 then
-    count = vim.lsp.diagnostic.get_count(0, severity)
-  else
-    local severities = {
-      ['Warning'] = vim.diagnostic.severity.WARN,
-      ['Error'] = vim.diagnostic.severity.ERROR,
-    }
-    count = #vim.diagnostic.get(0, {severity=severities[severity]})
-  end
+  local severities = {
+    ['Warning'] = vim.diagnostic.severity.WARN,
+    ['Error'] = vim.diagnostic.severity.ERROR,
+  }
+  local count = #vim.diagnostic.get(0, {severity=severities[severity]})
   if count < 1 then
     return ''
   end
@@ -26,13 +21,13 @@ local function get_warning()
 end
 
 local function get_lsp_clients()
-  local clients = vim.lsp.buf_get_clients()
-  if next(clients) == nil then
+  local clients = vim.lsp.get_clients({bufnr = 0})
+  if #clients == 0 then
     return "none"
   end
 
   local c = {}
-  for _, client in pairs(clients) do
+  for _, client in ipairs(clients) do
     table.insert(c, client.name)
   end
   return table.concat(c, "│")

@@ -210,15 +210,25 @@ local function set_hlgroups()
 end
 
 local function set_statusline()
+  local active = [[%{%luaeval('require("hardline").update_statusline(true)')%}]]
+  local inactive = [[%{%luaeval('require("hardline").update_statusline(false)')%}]]
   vim.opt.showmode = false
-  vim.opt.statusline = [[%{%luaeval('require("hardline").update_statusline(false)')%}]]
-  vim.cmd([[
-  augroup hardline
-    autocmd!
-    autocmd WinEnter,BufEnter * setlocal statusline=%{%luaeval('require(\"hardline\").update_statusline(true)')%}
-    autocmd WinLeave,BufLeave * setlocal statusline=%{%luaeval('require(\"hardline\").update_statusline(false)')%}
-  augroup END
-  ]])
+  vim.opt.statusline = inactive
+
+  local function set_local(value)
+    return function()
+      -- Since nvim 0.12 a floating window (oil, telescope, ...) draws a
+      -- statusline whenever it has a local one, so leave floats alone
+      if vim.api.nvim_win_get_config(0).relative ~= '' then
+        return
+      end
+      vim.api.nvim_set_option_value('statusline', value, {scope = 'local', win = 0})
+    end
+  end
+
+  local group = vim.api.nvim_create_augroup('hardline', {clear = true})
+  vim.api.nvim_create_autocmd({'WinEnter', 'BufEnter'}, {group = group, callback = set_local(active)})
+  vim.api.nvim_create_autocmd({'WinLeave', 'BufLeave'}, {group = group, callback = set_local(inactive)})
 end
 
 local function set_bufferline()
